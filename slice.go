@@ -23,4 +23,9 @@ func main() {
 	fmt.Printf("s1: %d\n", cap(s1))
 	fmt.Println(s2)
 	fmt.Println(s) //可以对切片再切片
+	s3 := append(s1, 6)
+	fmt.Println(s3)
+	s4 := append(s3, 7)
+	fmt.Println(s4)
+	fmt.Println(arr) //当slice的长度大于cap，slice视图参照一个cap更大的数组
 }
