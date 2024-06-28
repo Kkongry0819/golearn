@@ -5,6 +5,18 @@ import (
 	"test1/tree"
 )
 
+type myTreeNode struct {
+	node *tree.Node
+}
+
+func (myNode myTreeNode) postOrder() {
+	if myNode.node == nil {
+		return
+	}
+	myTreeNode{myNode.node.Left}.postOrder()
+	myTreeNode{myNode.node.Right}.postOrder()
+	myNode.node.Print()
+}
 func createTree(val int) *tree.Node { //工厂函数，Go会考虑建立在堆上还是栈上
 	return &tree.Node{Val: val}
 }
@@ -21,15 +33,19 @@ func main() {
 	root = tree.Node{
 		Val: 6,
 	}
-	root.Left = &tree.Node{}
-	root.Right = &tree.Node{}
+	root.Left = &tree.Node{Val: 3}
+	root.Right = &tree.Node{Val: 9}
 	root.Left.Left = new(tree.Node)
+	root.Left.Left.Val = 8
 	root.Left.Right = createTree(2)
 	root.Print()
 	print1(root)
 	print2(&root)
-	root.Left.Right.SetValue(9)
+	root.Left.Right.SetValue(12)
 	fmt.Println(root.Left.Right.Val)
 	root.Traverse()
+	fmt.Println()
 	(&root).Traverse()
+	fmt.Println()
+	myTreeNode{&root}.postOrder()
 }

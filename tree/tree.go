@@ -17,7 +17,7 @@ func (node *Node) Traverse() {
 	node.Right.Traverse()
 }
 func (node Node) Print() { //接收者相当于this，用于调用方法
-	fmt.Println(node.Val)
+	fmt.Printf("%d ", node.Val)
 }
 func (node *Node) SetValue(val int) {
 	if node == nil {
