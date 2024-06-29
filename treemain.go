@@ -9,6 +9,21 @@ type myTreeNode struct {
 	node *tree.Node
 }
 
+type myTreeNode1 struct { //embedding 内嵌
+	*tree.Node
+}
+
+func (myTreeNode) Traverse() {
+	fmt.Println("shadowed traverse")
+}
+func (myNode myTreeNode1) postOrder1() {
+	if myNode.Node == nil {
+		return
+	}
+	myTreeNode{myNode.Left}.postOrder()
+	myTreeNode{myNode.Right}.postOrder()
+	myNode.Print()
+}
 func (myNode myTreeNode) postOrder() {
 	if myNode.node == nil {
 		return
@@ -48,4 +63,9 @@ func main() {
 	(&root).Traverse()
 	fmt.Println()
 	myTreeNode{&root}.postOrder()
+	fmt.Println()
+	myTreeNode1{&root}.postOrder1()
+	var root1 myTreeNode
+	root1.Traverse()
+	root1.node.Traverse()
 }
