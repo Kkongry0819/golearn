@@ -32,4 +32,5 @@ func main() {
 	var s string
 	s, _ = retrieve("http://www.baidu.com")
 	fmt.Printf("%s", s)
+	fmt.Printf("%s", s)
 }
